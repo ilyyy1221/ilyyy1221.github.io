@@ -1,0 +1,306 @@
+/* ОБНУЛЕНИЕ И ГЛОБАЛЬНЫЕ СТИЛИ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #111111;
+    --primary-neon: #39ff14;
+    --secondary-neon: #d100ff;
+    --text-color: #e0e0e0;
+    --dark-grey: #1a1a1a;
+    --font-main: 'Roboto', sans-serif;
+    --font-title: 'Orbitron', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Эффект сканирующих линий */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 2px);
+    z-index: 10000;
+    pointer-events: none;
+    animation: scanline 10s linear infinite;
+}
+@keyframes scanline {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100px; }
+}
+
+/* ЗАГОЛОВКИ И КНОПКИ */
+.section-title {
+    font-family: var(--font-title);
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--primary-neon);
+    text-shadow: 0 0 5px var(--primary-neon), 0 0 10px var(--primary-neon);
+    letter-spacing: 2px;
+}
+
+.section-subtitle {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
+    color: #a0a0a0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    font-family: var(--font-title);
+    text-decoration: none;
+    border: 2px solid var(--primary-neon);
+    color: var(--primary-neon);
+    border-radius: 5px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn:hover, .btn.btn-primary {
+    background-color: var(--primary-neon);
+    color: var(--bg-color);
+    box-shadow: 0 0 15px var(--primary-neon), 0 0 25px var(--primary-neon);
+}
+
+.btn i {
+    margin-left: 8px;
+}
+
+/* ШАПКА */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 100;
+    background: rgba(17, 17, 17, 0.5);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(57, 255, 20, 0.2);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-title);
+    font-size: 1.8rem;
+    font-weight: 900;
+    text-decoration: none;
+    color: white;
+}
+.logo span { color: var(--primary-neon); }
+
+.nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin-left: 2rem;
+    font-weight: 700;
+    transition: color 0.3s;
+}
+.nav a:hover { color: var(--primary-neon); }
+
+/* ГЛАВНЫЙ ЭКРАН */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding-top: 80px;
+    background: radial-gradient(circle, #222 0%, var(--bg-color) 70%);
+}
+
+.hero-title {
+    font-family: var(--font-title);
+    font-size: 5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    position: relative;
+    color: white;
+    animation: glitch 1.5s linear infinite;
+}
+/* Glitch Effect */
+@keyframes glitch {
+  2%,64%{ transform: translate(2px,0) skew(0deg); }
+  4%,60%{ transform: translate(-2px,0) skew(0deg); }
+  62%{ transform: translate(0,0) skew(5deg); }
+}
+.hero-title:before,
+.hero-title:after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.hero-title:before {
+  left: 2px;
+  text-shadow: -2px 0 var(--primary-neon);
+  animation: glitch-anim-2 1.5s linear infinite reverse;
+}
+.hero-title:after {
+  left: -2px;
+  text-shadow: -2px 0 var(--secondary-neon);
+  animation: glitch-anim-1 1.5s linear infinite reverse;
+}
+@keyframes glitch-anim-1{ 0%,100%{ clip-path: inset(45% 0 45% 0); } 20%{ clip-path: inset(10% 0 80% 0); } 40%{ clip-path: inset(70% 0 5% 0); } 60%{ clip-path: inset(35% 0 50% 0); } 80%{ clip-path: inset(80% 0 10% 0); } }
+@keyframes glitch-anim-2{ 0%,100%{ clip-path: inset(60% 0 30% 0); } 20%{ clip-path: inset(90% 0 5% 0); } 40%{ clip-path: inset(5% 0 85% 0); } 60%{ clip-path: inset(45% 0 40% 0); } 80%{ clip-path: inset(20% 0 70% 0); } }
+
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 2.5rem auto;
+    color: #b0b0b0;
+}
+
+/* СЕКЦИЯ "О ИГРЕ" */
+.about {
+    padding: 80px 0;
+    background-color: var(--dark-grey);
+}
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+.about-text {
+    line-height: 1.8;
+}
+.about-text p {
+    margin-bottom: 1rem;
+}
+.features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+.feature {
+    background: var(--bg-color);
+    padding: 1.5rem;
+    border: 1px solid rgba(57, 255, 20, 0.2);
+    border-radius: 5px;
+    transition: transform 0.3s;
+}
+.feature:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-neon);
+}
+.feature i {
+    font-size: 2rem;
+    color: var(--primary-neon);
+    margin-bottom: 1rem;
+}
+.feature h3 {
+    font-family: var(--font-title);
+    margin-bottom: 0.5rem;
+}
+
+/* СЕКЦИЯ СКАЧИВАНИЯ */
+.download {
+    padding: 80px 0;
+}
+.download-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+.download-card {
+    background: rgba(26, 26, 26, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(57, 255, 20, 0.2);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+.download-card:hover {
+    border-color: var(--primary-neon);
+    transform: scale(1.05);
+}
+.card-icon {
+    font-size: 4rem;
+    color: white;
+    margin-bottom: 1.5rem;
+}
+.download-card h3 {
+    font-family: var(--font-title);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+.version, .size {
+    color: #aaa;
+    margin-bottom: 0.5rem;
+}
+.btn-download {
+    margin-top: 1.5rem;
+    width: 100%;
+}
+.install-instructions {
+    background: var(--dark-grey);
+    padding: 2rem;
+    border-left: 3px solid var(--primary-neon);
+}
+.install-instructions h3 {
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--primary-neon);
+}
+.install-instructions li {
+    margin: 0.5rem 0;
+    list-style-type: none;
+    color: #bbb;
+}
+.install-instructions b { color: white; }
+
+/* ФУТЕР */
+.footer {
+    padding: 2rem 0;
+    text-align: center;
+    background: var(--dark-grey);
+    color: #777;
+    border-top: 1px solid rgba(57, 255, 20, 0.1);
+}
+
+/* АДАПТИВНОСТЬ */
+@media (max-width: 768px) {
+    .section-title { font-size: 2rem; }
+    .hero-title { font-size: 3rem; }
+    .about-content { grid-template-columns: 1fr; }
+    .features { grid-template-columns: 1fr; }
+    .header .container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
